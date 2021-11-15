@@ -3,6 +3,7 @@ package utils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import common.Constant;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -13,11 +14,12 @@ import java.util.concurrent.TimeoutException;
  */
 public class RabbitMQUtil {
 
-    static final String HOST = "192.168.0.108";
+    static final String HOST = Constant.MQ_HOST;
+    static final ConnectionFactory factory;
 
-    public static Connection getConnection() throws IOException, TimeoutException {
+    static {
         // 定义连接工厂
-        final ConnectionFactory factory = new ConnectionFactory();
+        factory = new ConnectionFactory();
         // 设置服务地址
         factory.setHost(HOST);
         // 端口
@@ -27,8 +29,18 @@ public class RabbitMQUtil {
         factory.setVirtualHost("/ems");
         factory.setUsername("ems");
         factory.setPassword("ems");
-        // 通过工厂获取连接
-        return factory.newConnection();
+    }
+
+    public static Connection getConnection() {
+        try {
+            // 通过工厂获取连接
+            factory.newConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void close(Channel channel, Connection connection) {

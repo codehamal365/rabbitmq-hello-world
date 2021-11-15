@@ -33,7 +33,7 @@ public class Sender {
          */
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         // 消息内容
-        var message = "Hello world";
+        String message = "Hello world";
         // 向指定队列发送消息
         //参数：String exchange, String routingKey, BasicProperties props, byte[] body
         /**

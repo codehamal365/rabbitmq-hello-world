@@ -6,5 +6,8 @@ package common;
  */
 public interface Constant {
 
-    String DIRECT_TOPIC = "direct";
+    String MQ_HOST = "192.168.1.110";
+
+    String DIRECT_QUEUE = "direct";
+    String DIRECT_TOPIC = "direct_topic";
 }
