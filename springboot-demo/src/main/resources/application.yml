@@ -3,23 +3,45 @@ server:
 spring:
   application:
     name: mq-rabbitmq-producer
-  rabbitmq:
-    host: 192.168.0.108
-    port: 5672
-    username: admin
-    password: admin
-    virtualHost: /adolph
-    template:
-      retry:
-        enabled: true
-        initial-interval: 10000ms
-        max-interval: 300000ms
-        multiplier: 2
-      exchange: topic.exchange
-    publisher-confirms: true
-    # 手动提交消息
-    listener:
-      simple:
-        acknowledge-mode: manual
-      direct:
-        acknowledge-mode: manual
+#  rabbitmq:
+#    host: 192.168.0.108
+#    port: 5672
+#    username: admin
+#    password: admin
+#    virtualHost: /adolph
+#    template:
+#      retry:
+#        enabled: true
+#        initial-interval: 10000ms
+#        max-interval: 300000ms
+#        multiplier: 2
+#      exchange: topic.exchange
+#    publisher-confirms: true
+#    # 手动提交消息
+#    listener:
+#      simple:
+#        acknowledge-mode: manual
+#      direct:
+#        acknowledge-mode: manual
+
+config-map:
+  topics:
+    - topic: "topic"
+      actions:
+        - pub1
+        - sub
+      permission:
+        - a
+        - b
+      client:
+        - c
+        - d
+  scopes:
+    - mqtt
+    - email
+    - service
+user:
+  name: zhangsan
+  age: 18
+
+client-type:
