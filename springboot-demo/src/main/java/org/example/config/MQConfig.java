@@ -12,7 +12,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  *
@@ -26,8 +25,7 @@ import org.springframework.context.annotation.Configuration;
  * @author xie.wei
  * @since 2022-01-10
  */
-@Configuration
-public class RabbitMQConfig {
+public class MQConfig {
 
     // direct exchange start //
     @Bean
@@ -163,5 +161,4 @@ public class RabbitMQConfig {
         rabbitTemplate.setMessageConverter(messageConverter());
         return rabbitTemplate;
     }
-
 }
