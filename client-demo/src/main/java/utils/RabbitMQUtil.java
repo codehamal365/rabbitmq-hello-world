@@ -5,9 +5,6 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import common.Constant;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 /**
  * @author xie.wei
  * @since 2021/11/13
@@ -34,10 +31,8 @@ public class RabbitMQUtil {
     public static Connection getConnection() {
         try {
             // 通过工厂获取连接
-            factory.newConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+           return factory.newConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

@@ -1,4 +1,4 @@
-package demo.direct;
+package demo.wokerqueue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -6,12 +6,11 @@ import common.Constant;
 import utils.RabbitMQUtil;
 
 /**
- * 第一种模型(直连)
+ * working queue 生产者
  *
  * @author xie.wei
- * @date created at 2021-11-15 17:39
+ * @date created at 2022-01-06 15:16
  */
-@SuppressWarnings("all")
 public class Producer {
 
     public static void main(String[] args) {
@@ -32,7 +31,7 @@ public class Producer {
              *  生产消费都断开了连接后，队列自动删除，
              *  5. 参数，可以设置队列的扩展属性，比如：可设置存活时间等
              */
-            channel.queueDeclare(Constant.DIRECT_QUEUE, false, false, false,
+            channel.queueDeclare(Constant.WORKING_QUEUE, false, false, false,
                     null);
 
             /*
@@ -43,8 +42,11 @@ public class Producer {
              * 3. props 消息属性，可以设置消息为可持久化，MessageProperties.PERSISTENT_TEXT_PLAIN
              * 4. body 消息内容
              */
-            channel.basicPublish("", Constant.DIRECT_QUEUE, null,
-                    "hello world".getBytes());
+            for (int i = 0; i < 50; i++) {
+                String message = "working queue message: " + i;
+                channel.basicPublish("", Constant.WORKING_QUEUE, null,
+                        message.getBytes());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package org.example.utils;
+package demo.direct.ack;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

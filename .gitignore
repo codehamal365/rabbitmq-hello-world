@@ -1,1 +1,7 @@
 /.idea/
+*.iml
+*.targe/
+/springboot-demo/target/classes/
+/springboot-demo/target/test-classes/
+/client-demo/target/classes/
+/client-demo/target/test-classes/
